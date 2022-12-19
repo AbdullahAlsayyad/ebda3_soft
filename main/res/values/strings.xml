@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Exam App</string>
+    <string name="no_data">There are no data currently</string>
+    <string name="new_account">New Account</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="description">Description</string>
+    <string name="add">Add</string>
+    <string name="close">Close</string>
+    <string name="empty">Data must be filled in</string>
+    <string name="username_exisit">This username already exisit</string>
+    <string name="added">Added</string>
+    <string name="delete_all">Delete All</string>
+    <string name="delete">Delete</string>
+    <string name="_return">Return</string>
+    <string name="deleted">Deleted</string>
+    <string name="how_delete">To delete, drag the item left or right</string>
+    <string name="all_deleted">All Accounts Deleted</string>
+</resources>

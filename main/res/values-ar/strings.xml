@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">تطبيق الاختبار</string>
+    <string name="no_data">لايوجد بيانات حالياً</string>
+    <string name="new_account">حساب جديد</string>
+    <string name="name">الاسم</string>
+    <string name="password">كلمة المرور</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="description">وصف</string>
+    <string name="add">إضافة</string>
+    <string name="close">إغلاق</string>
+    <string name="empty">يجب تعبئة البيانات</string>
+    <string name="username_exisit">اسم المستخدم هذا موجود مسبقاً</string>
+    <string name="added">تمت الإضافة</string>
+    <string name="delete_all">حذف الكل</string>
+    <string name="delete">حذف</string>
+    <string name="_return">إرجاع</string>
+    <string name="deleted">تم الحذف</string>
+    <string name="how_delete">للحذف اسحب العنصر لليمين او اليسار</string>
+    <string name="all_deleted">تم حذف جميع الحسابات</string>
+</resources>
