@@ -10,7 +10,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 
-import org.jetbrains.annotations.NotNull;
+import java.util.HashSet;
 
 /**
  * This view it's a regular "android.widget.EditText" by adding that you can prevent a character or a set of characters
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
  */
 @SuppressLint("AppCompatCustomView")
 public class FilterEditText extends EditText {
-    private String forbiddenCharacters;
+    private HashSet<Character> forbiddenCharacters = new HashSet<>();
     private Animation animation = translateAnimation();
     private boolean doAnimation = true;
 
@@ -39,31 +39,34 @@ public class FilterEditText extends EditText {
 
     /**
      * For add forbidden characters.
-     * @param forbiddenCharacters the forbidden characters.
+     * @param characters the forbidden characters.
      */
-    public void setForbiddenCharacters(String forbiddenCharacters) {
-        this.forbiddenCharacters = forbiddenCharacters;
+    public void setForbiddenCharacters(char...characters) {
+        for (char c :
+                characters) {
+            this.forbiddenCharacters.add(c);
+        }
         addFilter(null);
     }
 
     /**
      * For add forbidden characters and not allowing animation
-     * @param forbiddenCharacters the forbidden characters.
+     * @param characters the forbidden characters.
      * @param doAnimation allowing animation .. it's true by default
      */
-    public void setForbiddenCharacters(String forbiddenCharacters, boolean doAnimation) {
+    public void setForbiddenCharacters(boolean doAnimation, char...characters) {
         this.doAnimation = doAnimation;
-        setForbiddenCharacters(forbiddenCharacters);
+        setForbiddenCharacters(characters);
     }
 
     /**
      * For add forbidden characters and animation
-     * @param forbiddenCharacters the forbidden characters.
+     * @param characters the forbidden characters.
      * @param animation animation when entering the forbidden character... it's translate animation by default
      */
-    public void setForbiddenCharacters(String forbiddenCharacters, Animation animation) {
+    public void setForbiddenCharacters(Animation animation, char...characters) {
         this.animation = animation;
-        setForbiddenCharacters(forbiddenCharacters);
+        setForbiddenCharacters(characters);
     }
 
 
@@ -74,7 +77,7 @@ public class FilterEditText extends EditText {
 
     /**
      * To Filter text inserted
-     * @param watcher if use ".addTextChangedListener"
+     * @param watcher if use {@link EditText#addTextChangedListener(TextWatcher)}
      */
     private void addFilter(TextWatcher watcher){
 
@@ -106,7 +109,7 @@ public class FilterEditText extends EditText {
 
                 if (lengthOfCharactersAdded <=0) return;
 
-                String textAfterFilter = deleteCharacters(new StringBuilder(s.toString()), sIndex, lengthOfCharactersAdded);
+                String textAfterFilter = deleteCharacters(s.toString(), sIndex, lengthOfCharactersAdded);
 
 //                if "lengthDifference" equal 0 mean user not insert forbidden character
                 int lengthDifference = (s.length()- textAfterFilter.length());
@@ -137,24 +140,22 @@ public class FilterEditText extends EditText {
         set.addAnimation(ta2);
         return set;
     }
-
+    
     /**
-     *
      * @param text All text
      * @param sIndex first index of text inserted
      * @param length length of text inserted
-     * @return
+     * @return text after filter
      */
-    private String deleteCharacters(@NotNull StringBuilder text, int sIndex, int length){
-//        text inserted
-        String subText = text.substring(sIndex, sIndex + length);
-
-//        check of letters
-        for (int i = 0; i < forbiddenCharacters.length(); i++)
-            subText = subText.replace(forbiddenCharacters.charAt(i)+"", "");
-
-        return text.replace(sIndex, sIndex+length, subText).toString();
+    private String deleteCharacters(String text, int sIndex, int length){
+        if (text == null) return null;
+        if (sIndex+length > text.length()) throw new IndexOutOfBoundsException();
+        StringBuilder newText = new StringBuilder(text);
+        for (int i = sIndex; i < sIndex+length && i < newText.length();) {
+            if (forbiddenCharacters.contains(newText.charAt(i)))
+                newText.deleteCharAt(i);
+            else i++;
+        }
+        return newText.toString();
     }
-
-
 }
