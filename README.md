@@ -1,6 +1,6 @@
 This app for add accounts and show them.
 
-I use custom view when add user name
+I use custom view when add username
 
 
 
