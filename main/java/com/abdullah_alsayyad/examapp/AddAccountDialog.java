@@ -49,7 +49,7 @@ public class AddAccountDialog {
         this.eTextDescription = view.findViewById(R.id.d1_etxt_description);
         this.btnAdd = view.findViewById(R.id.d1_btn_add);
 
-        eTextUsername.setForbiddenCharacters(" ,/;.");
+        eTextUsername.setForbiddenCharacters(' ',',','/',';','.');
 
         btnAdd.setOnClickListener(v -> {
             String name, username, password, description;
